@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
 import { DataSource, Repository } from 'typeorm';
@@ -7,6 +7,7 @@ import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
 import { Flavor } from './entities/flavor.entity/flavor.entity';
 import { Event } from '../events/entities/event.entity/event.entity';
+import { COFFEE_BRANDS, COFFEE_BRANDS_FACTORY } from './coffees.contants';
 
 /**通过@Injectable()声明了由Nest容器管理的类，将CoffeesService类标记被Provider */
 @Injectable()
@@ -17,7 +18,11 @@ export class CoffeesService {
     @InjectRepository(Flavor)
     private readonly FlavorRepository: Repository<Flavor>,
     private dataSource: DataSource, //DataSource 对象注入到一个类,通过该类调用createQueryRunner()方法创建一个事务
-  ) {}
+    @Inject(COFFEE_BRANDS) coffeeBrands: string[],
+    @Inject(COFFEE_BRANDS_FACTORY) coffeeBrands_f: string[],
+  ) {
+    console.log(coffeeBrands, coffeeBrands_f);
+  }
 
   findAll(paginationQuery: PaginationQueryDto) {
     const { limit, offset } = paginationQuery;
