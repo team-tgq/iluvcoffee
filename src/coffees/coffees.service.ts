@@ -8,6 +8,7 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
 import { Flavor } from './entities/flavor.entity/flavor.entity';
 import { Event } from '../events/entities/event.entity/event.entity';
 
+/**通过@Injectable()声明了由Nest容器管理的类，将CoffeesService类标记被Provider */
 @Injectable()
 export class CoffeesService {
   constructor(

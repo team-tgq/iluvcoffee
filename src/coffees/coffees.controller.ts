@@ -15,7 +15,10 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
 
 @Controller('coffees')
 export class CoffeesController {
-  constructor(private readonly coffeesService: CoffeesService) {}
+  constructor(
+    /**告诉Nest将提供程序注入到控制器类中以便我们使用它 */
+    private readonly coffeesService: CoffeesService,
+  ) {}
   @Get()
   findAll(@Query() paginationQuery: PaginationQueryDto) {
     return this.coffeesService.findAll(paginationQuery);
