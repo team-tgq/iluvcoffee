@@ -5,9 +5,9 @@ import { CoffeesController } from './coffees.controller';
 import { CoffeesService } from './coffees.service';
 import { Flavor } from './entities/flavor.entity/flavor.entity';
 
-@Module({ 
-    imports:[TypeOrmModule.forFeature([Coffee,Flavor])],
-    controllers: [CoffeesController], 
-    providers: [CoffeesService] 
+@Module({
+  imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
+  controllers: [CoffeesController],
+  providers: [CoffeesService],
 })
-export class CoffeesModule { }
+export class CoffeesModule {}
